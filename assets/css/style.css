@@ -1,12 +1,37 @@
-/*High Score and Timer at the top of the page*/
+/*timer placement and color*/
 .right #timer {
     float: right;
     color: darkblue;
-    
+    background-color: tomato;
+    /*position: absolute;*/    
 }
 
-.left #ViewHighScores {
+/*view high scores button placement and color*/
+.left #viewHighScores h4 {
     float: left;
     color: fuchsia;
+    background-color: turquoise;
+    margin-top: 0;
 }
 
+#nav {
+    text-align: center;
+    line-height: initial;
+    align-items: center;
+    height: inherit;
+    background-color: red;
+   /* position: relative;*/
+}
+
+/*main page section*/
+body {
+    background-color: #e7dfe1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+/*centering and aligning the quiz*/
+#content {
+    text-align: center;
+    padding: 8%;
+}
