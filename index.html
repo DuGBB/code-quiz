@@ -2,14 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, iSnitial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css"><!--link for css file-->
+  <script src="./assets/js/script.js"></script><!--link for js file-->
   <title>Code Quiz</title><!--page title-->
 </head>
+
 <body>
-  <input id="view-high-scores" type="button" value="view high scores">
-  <span id="timer">time: 0</span>
-  <script src="./assets/js/script.js"></script><!--link for js file-->
+
+  <section class="nav">
+    <div class="left">
+      <input id="ViewHighScores" type="button" value="View High Scores">
+    </div>
+    
+    <div class="right">
+      <span id="timer">time: 0</span>
+    </div>
+
+  </section>
+
+  <section id="landingPage">
+    <div id="content">
+      <h1>
+        JavaScript Fundamentals Quiz
+      </h1>
+      <button onclick="Click_To_Play!()">Click To Play!</button>
+    </div>
+  </section>
 </body>
 </html>

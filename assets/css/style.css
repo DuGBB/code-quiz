@@ -1,0 +1,12 @@
+/*High Score and Timer at the top of the page*/
+.right #timer {
+    float: right;
+    color: darkblue;
+    
+}
+
+.left #ViewHighScores {
+    float: left;
+    color: fuchsia;
+}
+
