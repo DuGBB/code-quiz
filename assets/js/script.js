@@ -1,6 +1,6 @@
 //setting variables
 var timer;
-var curQuestion = -1;
+var curIndex = -1;
 //quiz questions, available choices, and correst answers array
 var questions = [{
     question: "Commonly used data types DO Not Include",
@@ -41,26 +41,26 @@ function startQuiz() {
 
 //displays the question
 function next() {
-    curQuestion++;//increments it up from -1
+    curIndex++;//increments it up from -1
 
-    if (curQuestion > questions.length - 1) (
+    if (curIndex > questions.length - 1) (
         console.log("exiting game")//logging that endgame works
     );
-    /*
-    var showQuestion = document.getElementById("mainIdea");
-    var newItem = document.createElement("h1");
-    newItem.innerHTML = questions[curQuestion].question;
-    showQuestion.parentNode.replaceChild(newItem, showQuestion);
 
-    var getEl = document.getElementById("paragraph");
-    getEl.parentNode.removeChild(getEl);
-        */
-    
     var contentArea = document.getElementById("content");//grabbing div
     var newDiv = document.createElement("div");//creates new content div
     newDiv.setAttribute("id", "content");//save stylings
 
-    newDiv.innerHTML = "<h1>" + questions[curQuestion].question + "</h1>";//inserts question text
+    //newDiv.innerHTML = "<h1>" + questions[curIndex].question + "</h1>";//inserts question text
+    
+    var newHtml = "<h1>" + questions[curIndex].question + "</h1>";//inserts question text
+    var curChoices = questions[curIndex].choices;
 
+    for(var loopCounter = 0; loopCounter < curChoices.length; loopCounter++) {
+        newHtml = newHtml + "<button onclick=\"next()\">" + curChoices[loopCounter] + "</button><br/>"
+    }
+    newDiv.innerHTML = newHtml;
+
+    
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
 };

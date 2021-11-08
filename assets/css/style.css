@@ -40,6 +40,8 @@ button /*assgns button style*/
     color: white;
     font-size: 20px;
     padding: 10px 20px;
+    margin: 5px 5px;
+    margin-left: 0px;
 }
 
 button:hover {/*assigns button hover*/
