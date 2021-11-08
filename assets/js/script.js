@@ -34,6 +34,9 @@ var questions = [{
 function startQuiz() {
     timer = 75;
     var x = setInterval(() => {
+        if (score > -1) {
+            clearInterval(x);
+        }
         timer--;
         document.getElementById("timer").innerHTML = "Timer:  " + timer;
         if (timer <= 0) {
@@ -102,6 +105,10 @@ function endGame() {
     var endHtml = "<h1>All done!</h1>";
 
     endHtml = endHtml + "<p>Your final score is " + score + "!</p>";  
+    endHtml = endHtml + "<form><label for=\"initials\">Enter Initials:</label>";
+    endHtml = endHtml + "<input type=\"text\" id=\"initials\" name=\"initials\">";
+    endHtml = endHtml + "<button>Subnit</button></form>";
+    
     newDiv.innerHTML = endHtml;
 
     
