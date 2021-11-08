@@ -39,14 +39,28 @@ function startQuiz() {
     next();
 };
 
+//displays the question
 function next() {
-    curQuestion++;
+    curQuestion++;//increments it up from -1
 
     if (curQuestion > questions.length - 1) (
-        console.log("exiting game")
+        console.log("exiting game")//logging that endgame works
     );
-    var showQuestion = document.getElementById("content");
+    /*
+    var showQuestion = document.getElementById("mainIdea");
     var newItem = document.createElement("h1");
     newItem.innerHTML = questions[curQuestion].question;
     showQuestion.parentNode.replaceChild(newItem, showQuestion);
+
+    var getEl = document.getElementById("paragraph");
+    getEl.parentNode.removeChild(getEl);
+        */
+    
+    var contentArea = document.getElementById("content");//grabbing div
+    var newDiv = document.createElement("div");//creates new content div
+    newDiv.setAttribute("id", "content");//save stylings
+
+    newDiv.innerHTML = "<h1>" + questions[curQuestion].question + "</h1>";//inserts question text
+
+    contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
 };

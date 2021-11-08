@@ -29,9 +29,10 @@ body {
 #content {
     text-align: center;
     padding: 8%;
+    background-color: hotpink;
 }
 
-button 
+button /*assgns button style*/
 {
     background-color: darkblue;
     border: none;
@@ -41,7 +42,7 @@ button
     padding: 10px 20px;
 }
 
-button:hover {
+button:hover {/*assigns button hover*/
     transition-duration: 0.3s;
     background-color: rgb(190, 85, 190);
 }
