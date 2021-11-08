@@ -1,6 +1,8 @@
 //setting variables
 var timer;
 var curIndex = -1;
+var preAnswer = "";
+var score = -50;
 //quiz questions, available choices, and correst answers array
 var questions = [{
     question: "Commonly used data types DO Not Include",
@@ -31,11 +33,16 @@ var questions = [{
 
 function startQuiz() {
     timer = 75;
-    document.getElementById("timer").innerHTML = timer;
-        setTimeout(function(){
-            timer = timer-1;
-            console.log("TIMER " + timer);
-        }, 1000);
+    var x = setInterval(() => {
+        timer--;
+        document.getElementById("timer").innerHTML = "Timer:  " + timer;
+        if (timer <= 0) {
+            console.log('TIMERWORKS?');
+            endGame();
+            clearInterval(x);
+        }
+    }, 1000);
+
     next();
 };
 
@@ -43,24 +50,61 @@ function startQuiz() {
 function next() {
     curIndex++;//increments it up from -1
 
-    if (curIndex > questions.length - 1) (
-        console.log("exiting game")//logging that endgame works
-    );
+    if (curIndex > questions.length - 1) {
+       //logging that endgame work
+
+    endGame();
+    };
 
     var contentArea = document.getElementById("content");//grabbing div
     var newDiv = document.createElement("div");//creates new content div
     newDiv.setAttribute("id", "content");//save stylings
 
-    //newDiv.innerHTML = "<h1>" + questions[curIndex].question + "</h1>";//inserts question text
-    
     var newHtml = "<h1>" + questions[curIndex].question + "</h1>";//inserts question text
     var curChoices = questions[curIndex].choices;
 
     for(var loopCounter = 0; loopCounter < curChoices.length; loopCounter++) {
-        newHtml = newHtml + "<button onclick=\"next()\">" + curChoices[loopCounter] + "</button><br/>"
+        
+        if (curChoices[loopCounter] === questions[curIndex].answer){
+            newHtml = newHtml + "<button onclick=\"correct()\">" + curChoices[loopCounter] + "</button><br/>";
+        } else {newHtml = newHtml + "<button onclick=\"wrong()\">" + curChoices[loopCounter] + "</button><br/>";
+
+        }
     }
+    newHtml = newHtml + "<hr>";
+    newHtml = newHtml + preAnswer;
     newDiv.innerHTML = newHtml;
 
     
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
 };
+
+function correct() {
+    preAnswer = "Correct!"; 
+    next();
+}
+
+function wrong() {
+    preAnswer = "Wrong!";
+    timer = timer - 10;
+    next();
+}
+
+function endGame() {
+    if(score < 0) {
+    score = timer; 
+    var contentArea = document.getElementById("content");//grabbing div
+    var newDiv = document.createElement("div");//creates new content div
+    newDiv.setAttribute("id", "content");//save stylings
+    
+    //More To Come
+
+    var endHtml = "<h1>All done!</h1>";
+
+    endHtml = endHtml + "<p>Your final score is " + score + "!</p>";  
+    newDiv.innerHTML = endHtml;
+
+    
+    contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
+    }
+}
