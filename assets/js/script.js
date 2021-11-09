@@ -57,6 +57,7 @@ function next() {
        //logging that endgame work
 
     endGame();
+    return 0;
     };
 
     var contentArea = document.getElementById("content");//grabbing div
@@ -102,7 +103,7 @@ function endGame() {
     
     //More To Come
 
-    var endHtml = "<h1>All done!</h1>";
+    /*var endHtml = "<h1>All done!</h1>";
 
     endHtml = endHtml + "<p>Your final score is " + score + "!</p>";  
     endHtml = endHtml + "<form><label for=\"initials\">Enter Initials:</label>";
@@ -110,8 +111,35 @@ function endGame() {
     endHtml = endHtml + "<button>Subnit</button></form>";
     
     newDiv.innerHTML = endHtml;
+        */
 
+    var overGame = document.createElement("h1");
+    overGame.innerHTML = "All Done!";
+    newDiv.appendChild(overGame);
     
+    var finalScore = document.createElement("p");
+    finalScore.innerHTML ="Your final score is " + score + "!";
+    newDiv.appendChild(finalScore);
+
+    var endForm = document.createElement("form");
+
+    var endLabel = document.createElement("label");
+    endLabel.setAttribute("for", "initials");
+    endLabel.innerHTML = "Enter Initials ";
+    
+    var endInput = document.createElement("input");
+    endInput.setAttribute("type", "text");
+    endInput.setAttribute("id", "initials");
+    endInput.setAttribute("name", "initials");
+
+    var endButton = document.createElement("button");
+    endButton.innerHTML = "Submit ";
+
+    endForm.appendChild(endLabel);
+    endForm.appendChild(endInput);
+    endForm.appendChild(endButton);
+    newDiv.appendChild(endForm);
+
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
     }
 }
