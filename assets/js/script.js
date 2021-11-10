@@ -31,22 +31,21 @@ var questions = [{
     }
 ];
 
-function startQuiz() {
+function startQuiz() {//creates timer
     timer = 75;
-    var x = setInterval(() => {
+    var x = setInterval(() => {//sets a one second interval
         if (score > -1) {
-            clearInterval(x);
+            clearInterval(x);//stops timer
         }
         timer--;
-        document.getElementById("timer").innerHTML = "Timer:  " + timer;
+        document.getElementById("timer").innerHTML = "Timer:  " + timer;//writes timer to screen
         if (timer <= 0) {
-            console.log('TIMERWORKS?');
             endGame();
-            clearInterval(x);
+            clearInterval(x);//stops timer
         }
-    }, 1000);
+    }, 1000);//sets coutdown interval
 
-    next();
+    next();//displays next question
 };
 
 //displays the question
@@ -64,31 +63,42 @@ function next() {
     var newDiv = document.createElement("div");//creates new content div
     newDiv.setAttribute("id", "content");//save stylings
 
-    var newHtml = "<h1>" + questions[curIndex].question + "</h1>";//inserts question text
-    var curChoices = questions[curIndex].choices;
+    //var newHtml = "<h1>" + questions[curIndex].question + "</h1>";//inserts question text
 
-    for(var loopCounter = 0; loopCounter < curChoices.length; loopCounter++) {
+    var newHtml = document.createElement("h1");// replaced syntax on line 67
+    newHtml.innerHTML = questions[curIndex].question;
+    var curChoices = questions[curIndex].choices;
+    newDiv.appendChild(newHtml);
+
+    for(var loopCounter = 0; loopCounter < curChoices.length; loopCounter++) {//for loop creates choice buttons
+        
+        var choiceButton = document.createElement("button");//creates button
+        choiceButton.innerHTML = curChoices[loopCounter];//creates text for button
         
         if (curChoices[loopCounter] === questions[curIndex].answer){
-            newHtml = newHtml + "<button onclick=\"correct()\">" + curChoices[loopCounter] + "</button><br/>";
-        } else {newHtml = newHtml + "<button onclick=\"wrong()\">" + curChoices[loopCounter] + "</button><br/>";
+            choiceButton.setAttribute("onclick", "correct()");//calls correct function if answer is correct
+
+        } else {choiceButton.setAttribute("onclick", "wrong()");//calls  wrong function is answer is incorrect
 
         }
+        var breakLine = document.createElement("br");
+        newDiv.appendChild(choiceButton);
+        newDiv.appendChild(breakLine);//makes buttons verticle
     }
-    newHtml = newHtml + "<hr>";
-    newHtml = newHtml + preAnswer;
-    newDiv.innerHTML = newHtml;
 
+    var horRow = document.createElement("hr");
+    newDiv.appendChild(horRow);//creates horizontal line to showcase whether the previous answer was correct or incorrect
+    newDiv.append(preAnswer);
     
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
 };
 
-function correct() {
+function correct() {//what to do the correct answer is chosen
     preAnswer = "Correct!"; 
     next();
 }
 
-function wrong() {
+function wrong() {//what to do when incorrect answer is chosen
     preAnswer = "Wrong!";
     timer = timer - 10;
     next();
@@ -113,32 +123,32 @@ function endGame() {
     newDiv.innerHTML = endHtml;
         */
 
-    var overGame = document.createElement("h1");
-    overGame.innerHTML = "All Done!";
+    var overGame = document.createElement("h1");//127 - 154 replaced syntax from commented code above
+    overGame.innerHTML = "All Done!";//write to screen when quiz is done
     newDiv.appendChild(overGame);
     
-    var finalScore = document.createElement("p");
+    var finalScore = document.createElement("p");//writes to screen the final score
     finalScore.innerHTML ="Your final score is " + score + "!";
     newDiv.appendChild(finalScore);
 
-    var endForm = document.createElement("form");
+    var endForm = document.createElement("form");//creates form for submit button
 
     var endLabel = document.createElement("label");
-    endLabel.setAttribute("for", "initials");
+    endLabel.setAttribute("for", "initials");//creates label to enter player initials
     endLabel.innerHTML = "Enter Initials ";
     
     var endInput = document.createElement("input");
     endInput.setAttribute("type", "text");
-    endInput.setAttribute("id", "initials");
+    endInput.setAttribute("id", "initials");//creates input element to enter initials
     endInput.setAttribute("name", "initials");
 
-    var endButton = document.createElement("button");
+    var endButton = document.createElement("button");//creates the submit button
     endButton.innerHTML = "Submit ";
 
-    endForm.appendChild(endLabel);
-    endForm.appendChild(endInput);
-    endForm.appendChild(endButton);
-    newDiv.appendChild(endForm);
+    endForm.appendChild(endLabel);//add label to form
+    endForm.appendChild(endInput);//add input to form
+    endForm.appendChild(endButton);//add button to form
+    newDiv.appendChild(endForm);//add form to div
 
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
     }
