@@ -137,6 +137,11 @@ function endGame() {
     newDiv.appendChild(endLabel);
     newDiv.appendChild(endInput);
     newDiv.appendChild(endButton);
+
+    var horRow = document.createElement("hr");
+    newDiv.appendChild(horRow);//creates horizontal line to showcase whether the previous answer was correct or incorrect
+    newDiv.append(preAnswer);
+    
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
     }
 }
