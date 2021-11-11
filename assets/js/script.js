@@ -133,11 +133,6 @@ function endGame() {
     var endButton = document.createElement("button");//creates the submit button
     endButton.innerHTML = "Submit ";
     endButton.setAttribute("onclick", "subMit()");
-    
-    //endForm.appendChild(endLabel);//add label to form
-    //endForm.appendChild(endInput);//add input to form
-    //endForm.appendChild(endButton);//add button to form
-    //newDiv.appendChild(endForm);//add form to div
 
     newDiv.appendChild(endLabel);
     newDiv.appendChild(endInput);
@@ -146,19 +141,25 @@ function endGame() {
     }
 }
 
-function subMit() {debugger
+function subMit() {
     var name = document.getElementById('initials').value;
-    //console.log(name);
-    localStorage.setItem("initials", "finalScore");
-    localStorage["score"] = JSON.stringify(score);
-    console.log("score");
-    console.log(name);
-    //clearInterval(0);
-    viewHighScore();
-    debugger
+   console.log("WANNA");
+    var scoresArray = localStorage.getItem("scoresArray");
+    console.log(scoresArray);
+    var scoreGet = JSON.parse(scoresArray);
+    var newScore = [name, timer];
+    if (scoreGet.length < 5) {
+        scoreGet.push(newScore);
+    } else {
+
+    };
+    localStorage["scoresArray"] = JSON.stringify(scoreGet);
+    
+
+    viewHighScores();
 }
 
-function viewHighScore() {
+function viewHighScores() {
     var contentScore = document.getElementById("content");
     var newDiv = document.createElement("div");
     newDiv.setAttribute("id", "content");
@@ -167,6 +168,47 @@ function viewHighScore() {
     scoreTitle.innerHTML = "High score";
     newDiv.appendChild(scoreTitle);
 
+    var readNow = document.createElement("textarea");
+    readNow.setAttribute("rows", "5");
+    readNow.setAttribute("cols", "20");
+    readNow.readOnly = true;
+    var scoresArray = localStorage.getItem("scoresArray");
+    var scoreGet = JSON.parse(scoresArray);
+
+    var arrayList = "";
+
+    for (let index = 0; index < scoreGet.length; index++) {
+        const element = scoreGet[index];
+        arrayList = arrayList + element[0] + "   " + element[1] + "\n";     
+    }
+
+    readNow.innerHTML = arrayList;
+        
+    
+    newDiv.appendChild(readNow);
+
+    var breakLine = document.createElement("br");
+    newDiv.appendChild(breakLine);//makes buttons verticle
+
+    var resetButton =document.createElement("button");
+    resetButton.innerHTML = "Go Back";
+    resetButton.setAttribute("onclick", "goBack()");
+    newDiv.appendChild(resetButton);
+
+    var clearButton = document.createElement("button");
+    clearButton.innerHTML = "Clear high scores";
+    clearButton.setAttribute("onclick", "clearScores()");
+    newDiv.appendChild(clearButton);
+
+
     contentScore.parentNode.replaceChild(newDiv, contentScore);
-    debugger
+}
+
+function goBack() {
+    window.location.href = "index.html";
+}
+
+function clearScores() {
+    localStorage.clear();
+    console.log("clearScores");
 }
