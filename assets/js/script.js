@@ -151,18 +151,39 @@ function subMit() {
    console.log("WANNA");
     var scoresArray = localStorage.getItem("scoresArray");
     console.log(scoresArray);
-    var scoreGet = JSON.parse(scoresArray);
     var newScore = [name, timer];
+    if (scoresArray === null) {
+        scoreGet = [];
+    } else {
+        var scoreGet = JSON.parse(scoresArray);
+    }
     if (scoreGet.length < 5) {
         scoreGet.push(newScore);
-    } else {
-
+    } else {scoreGet =scoreUpdate(newScore, scoreGet);
     };
     localStorage["scoresArray"] = JSON.stringify(scoreGet);
-    
 
     viewHighScores();
 }
+
+function scoreUpdate(newScore, scoreGet) {
+    var minScore = 75;
+    var minScoreIndex = -1;
+    for (let index = 0; index < scoreGet.length; index++) {
+        const element = scoreGet[index];
+        if (minScore > element[1]) {
+            minScore = element[1];
+            minScoreIndex = index;
+        }
+        
+    }
+    if (minScore < newScore[1]) {
+        scoreGet[minScoreIndex] = newScore;
+    }
+    return scoreGet;
+}
+        
+
 
 function viewHighScores() {
     var contentScore = document.getElementById("content");
@@ -178,7 +199,12 @@ function viewHighScores() {
     readNow.setAttribute("cols", "20");
     readNow.readOnly = true;
     var scoresArray = localStorage.getItem("scoresArray");
-    var scoreGet = JSON.parse(scoresArray);
+
+    if (scoresArray === null) {
+        var scoreGet = [];
+    } else {
+        var scoreGet = JSON.parse(scoresArray);
+    }
 
     var arrayList = "";
 
@@ -216,4 +242,5 @@ function goBack() {
 function clearScores() {
     localStorage.clear();
     console.log("clearScores");
+    viewHighScores();
 }
