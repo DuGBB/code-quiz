@@ -3,6 +3,8 @@ var timer;
 var curIndex = -1;
 var preAnswer = "";
 var score = -50;
+var questions = [];
+
 //quiz questions, available choices, and correst answers array
 var questions = [{
     question: "Commonly used data types DO Not Include",
@@ -63,8 +65,6 @@ function next() {
     var newDiv = document.createElement("div");//creates new content div
     newDiv.setAttribute("id", "content");//save stylings
 
-    //var newHtml = "<h1>" + questions[curIndex].question + "</h1>";//inserts question text
-
     var newHtml = document.createElement("h1");// replaced syntax on line 67
     newHtml.innerHTML = questions[curIndex].question;
     var curChoices = questions[curIndex].choices;
@@ -110,18 +110,6 @@ function endGame() {
     var contentArea = document.getElementById("content");//grabbing div
     var newDiv = document.createElement("div");//creates new content div
     newDiv.setAttribute("id", "content");//save stylings
-    
-    //More To Come
-
-    /*var endHtml = "<h1>All done!</h1>";
-
-    endHtml = endHtml + "<p>Your final score is " + score + "!</p>";  
-    endHtml = endHtml + "<form><label for=\"initials\">Enter Initials:</label>";
-    endHtml = endHtml + "<input type=\"text\" id=\"initials\" name=\"initials\">";
-    endHtml = endHtml + "<button>Subnit</button></form>";
-    
-    newDiv.innerHTML = endHtml;
-        */
 
     var overGame = document.createElement("h1");//127 - 154 replaced syntax from commented code above
     overGame.innerHTML = "All Done!";//write to screen when quiz is done
@@ -131,7 +119,7 @@ function endGame() {
     finalScore.innerHTML ="Your final score is " + score + "!";
     newDiv.appendChild(finalScore);
 
-    var endForm = document.createElement("form");//creates form for submit button
+    //var endForm = document.createElement("form");//creates form for submit button
 
     var endLabel = document.createElement("label");
     endLabel.setAttribute("for", "initials");//creates label to enter player initials
@@ -144,12 +132,41 @@ function endGame() {
 
     var endButton = document.createElement("button");//creates the submit button
     endButton.innerHTML = "Submit ";
+    endButton.setAttribute("onclick", "subMit()");
+    
+    //endForm.appendChild(endLabel);//add label to form
+    //endForm.appendChild(endInput);//add input to form
+    //endForm.appendChild(endButton);//add button to form
+    //newDiv.appendChild(endForm);//add form to div
 
-    endForm.appendChild(endLabel);//add label to form
-    endForm.appendChild(endInput);//add input to form
-    endForm.appendChild(endButton);//add button to form
-    newDiv.appendChild(endForm);//add form to div
-
+    newDiv.appendChild(endLabel);
+    newDiv.appendChild(endInput);
+    newDiv.appendChild(endButton);
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
     }
+}
+
+function subMit() {debugger
+    var name = document.getElementById('initials').value;
+    //console.log(name);
+    localStorage.setItem("initials", "finalScore");
+    localStorage["score"] = JSON.stringify(score);
+    console.log("score");
+    console.log(name);
+    //clearInterval(0);
+    viewHighScore();
+    debugger
+}
+
+function viewHighScore() {
+    var contentScore = document.getElementById("content");
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute("id", "content");
+
+    var scoreTitle = document.createElement("h1");
+    scoreTitle.innerHTML = "High score";
+    newDiv.appendChild(scoreTitle);
+
+    contentScore.parentNode.replaceChild(newDiv, contentScore);
+    debugger
 }
