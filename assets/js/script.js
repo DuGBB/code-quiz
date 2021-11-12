@@ -7,7 +7,7 @@ var questions = [];
 
 //quiz questions, available choices, and correst answers array
 var questions = [{
-    question: "Commonly used data types DO Not Include",
+    question: "Commonly used data types DO Not Include _____",
     choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
     answer: "3. alerts"
     },
@@ -65,10 +65,15 @@ function next() {
     var newDiv = document.createElement("div");//creates new content div
     newDiv.setAttribute("id", "content");//save stylings
 
-    var newHtml = document.createElement("h1");// replaced syntax on line 67
+    var newHtml = document.createElement("h2");// replaced syntax on line 67
+    newHtml.setAttribute("id", "htmlNew");
     newHtml.innerHTML = questions[curIndex].question;
     var curChoices = questions[curIndex].choices;
     newDiv.appendChild(newHtml);
+
+    var buttonDiv = document.createElement("div");
+    buttonDiv.setAttribute("id", "divButton");
+    
 
     for(var loopCounter = 0; loopCounter < curChoices.length; loopCounter++) {//for loop creates choice buttons
         
@@ -82,13 +87,18 @@ function next() {
 
         }
         var breakLine = document.createElement("br");
-        newDiv.appendChild(choiceButton);
-        newDiv.appendChild(breakLine);//makes buttons verticle
+        buttonDiv.appendChild(choiceButton);
+        buttonDiv.appendChild(breakLine);//makes buttons verticle
     }
-
+    
+    newDiv.appendChild(buttonDiv);
     var horRow = document.createElement("hr");
     newDiv.appendChild(horRow);//creates horizontal line to showcase whether the previous answer was correct or incorrect
-    newDiv.append(preAnswer);
+
+    var bottomAnswer =document.createElement("p");
+    bottomAnswer.setAttribute("id", "answerBottom");
+    bottomAnswer.innerHTML = preAnswer;
+    newDiv.appendChild(bottomAnswer);
     
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
 };
@@ -110,13 +120,15 @@ function endGame() {
     var contentArea = document.getElementById("content");//grabbing div
     var newDiv = document.createElement("div");//creates new content div
     newDiv.setAttribute("id", "content");//save stylings
+    newDiv.style.textAlign = "left";
 
-    var overGame = document.createElement("h1");//127 - 154 replaced syntax from commented code above
+    var overGame = document.createElement("h2");//127 - 154 replaced syntax from commented code above
     overGame.innerHTML = "All Done!";//write to screen when quiz is done
     newDiv.appendChild(overGame);
     
     var finalScore = document.createElement("p");//writes to screen the final score
     finalScore.innerHTML ="Your final score is " + score + "!";
+    finalScore.setAttribute("id", "scoreFinal");
     newDiv.appendChild(finalScore);
 
     //var endForm = document.createElement("form");//creates form for submit button
@@ -131,6 +143,7 @@ function endGame() {
     endInput.setAttribute("name", "initials");
 
     var endButton = document.createElement("button");//creates the submit button
+    endButton.setAttribute("id", "buttonEnd");
     endButton.innerHTML = "Submit ";
     endButton.setAttribute("onclick", "subMit()");
 
@@ -140,7 +153,11 @@ function endGame() {
 
     var horRow = document.createElement("hr");
     newDiv.appendChild(horRow);//creates horizontal line to showcase whether the previous answer was correct or incorrect
-    newDiv.append(preAnswer);
+
+    var bottomAnswer =document.createElement("p");
+    bottomAnswer.setAttribute("id", "answerBottom");
+    bottomAnswer.innerHTML = preAnswer;
+    newDiv.appendChild(bottomAnswer);
     
     contentArea.parentNode.replaceChild(newDiv, contentArea);//replaces previous content
     }
@@ -189,8 +206,9 @@ function viewHighScores() {
     var contentScore = document.getElementById("content");
     var newDiv = document.createElement("div");
     newDiv.setAttribute("id", "content");
+    newDiv.style.textAlign = "left";
 
-    var scoreTitle = document.createElement("h1");
+    var scoreTitle = document.createElement("h2");
     scoreTitle.innerHTML = "High score";
     newDiv.appendChild(scoreTitle);
 

@@ -28,8 +28,55 @@ body {
 /*centering and aligning the quiz*/
 #content {
     text-align: center;
+    margin-left: 150px;
     padding: 8%;
-    background-color: hotpink;
+}
+
+.startButton{
+    align-items: center;
+    margin: auto;
+    display: flex;
+}
+
+#htmlNew {
+    text-align: left;
+} 
+
+h1 {
+    text-align: center;
+}
+
+.openP {
+    text-align: center;
+}
+
+#answerBottom {
+    font-style: italic;
+    text-align: left;
+    font-size: 25px;
+    color: grey;
+}
+
+h2 {
+    text-align: left;
+}
+
+#buttonEnd {
+    margin-left: 8px;
+}
+
+#scoreFinal {
+    text-align: left;
+    margin-bottom: 0;
+}
+
+#divButton {
+    display: table;
+}
+
+#divButton button {
+    width: 100%;
+    text-align: left;
 }
 
 button /*assgns button style*/
